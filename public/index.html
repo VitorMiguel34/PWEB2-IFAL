@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/" method="POST" id="form">
+        <label for="nome">Nome: </label>
+        <input type="text" name="nome" id="nome"><br>
+        <label for="senha">Senha: </label>
+        <input type="password" name="senha" id="senha"><br>
+        <button type="submit">Enviar dados</button>
+    </form>
+</body>
+<script>
+    const ROOT = "http://localhost:3000"
+    document.getElementById("form").addEventListener("submit", async (e) => {
+        e.preventDefault()
+        try{
+            const req = {
+                body:JSON.stringify({
+                    nome:document.getElementById("nome").value,
+                    senha:document.getElementById("senha").value
+                }),
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                method:"POST",
+                mode:"cors"
+            }
+            const response = await fetch(ROOT,req)
+            const dados = await response.json()
+            alert(dados.mensagem)
+            e.target.reset()
+        }
+        catch(error){
+            console.error(error)
+            alert("Erro")
+        }
+    })
+</script>
+</html>
