@@ -14,31 +14,5 @@
         <button type="submit">Enviar dados</button>
     </form>
 </body>
-<script>
-    const ROOT = "http://localhost:3000"
-    document.getElementById("form").addEventListener("submit", async (e) => {
-        e.preventDefault()
-        try{
-            const req = {
-                body:JSON.stringify({
-                    nome:document.getElementById("nome").value,
-                    senha:document.getElementById("senha").value
-                }),
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                method:"POST",
-                mode:"cors"
-            }
-            const response = await fetch(ROOT,req)
-            const dados = await response.json()
-            alert(dados.mensagem)
-            e.target.reset()
-        }
-        catch(error){
-            console.error(error)
-            alert("Erro")
-        }
-    })
-</script>
+<script src="index.js"></script>
 </html>
