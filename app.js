@@ -1,16 +1,24 @@
 const express = require("express")
+const path = require("path")
 
 app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 const PORT = 3000
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, "views"));
+
 app.listen(PORT, () => {
     console.log(`Ola! Servidor rodando em http://localhost:${PORT}`)
 })
 
 app.get("/", (req,res) => {
-    res.sendFile(__dirname + "/public/index.html")
+    const data = {
+        titulo:"Pagina inicial",
+        nome: req.query.nome
+    }
+    res.render("index", data)
 })
 
 app.post("/", (req,res) => {
@@ -27,15 +35,5 @@ app.post("/", (req,res) => {
         res.json({
             mensagem:"Cadastro falhou!"
         })
-    }
-})
-
-app.get("/:id", (req,res) => {
-    try{
-        const id = req.params.id
-        res.send(id)
-    }
-    catch(error){
-        res.send(error)
     }
 })
