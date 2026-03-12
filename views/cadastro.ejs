@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Página de cadastro</h1>
-    <form action="/" method="POST" id="form">
+    <form action="/" method="POST" id="formLogin">
         <label for="nome">Nome: </label>
         <input type="text" name="nome" id="nome"><br>
         <label for="senha">Senha: </label>
@@ -15,35 +15,5 @@
         <button type="submit">Enviar dados</button>
     </form>
 </body>
-<script>
-    const axios = require("axios")
-
-    const ROOT = "http://localhost:3000"
-    const api = axios.create(
-        {
-            baseUrl: ROOT,
-            timeout: 10000,
-            headers:{
-                "Content-type": "application/json"
-            }
-        }   
-    )
-
-    document.getElementById("form").addEventListener("submit", async (e) => {
-        e.preventDefault()
-        try{
-            const dados = {
-                nome: document.getElementById("nome").value,
-                senha: document.getElementById("senha").value
-            }
-            const resposta = await api.post("/",dados)
-            const dadosResposta = await resposta.json()
-            alert(dadosResposta.mensagem)
-            e.target.reset()
-        }
-        catch(error){
-            console.error(error)
-        }
-    })
-</script>
+<script src="cadastro.js"></script>
 </html>

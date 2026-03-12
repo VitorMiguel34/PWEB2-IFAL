@@ -40,7 +40,7 @@ app.post("/", (req, res) => {
         const { nome, senha } = req.body;
         usuariosCadastrados.push({ nome, senha });
         console.log("Lista atual:", usuariosCadastrados);
-        res.json({mensagem: "Cadastro concluido"})
+        res.redirect("/login")
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensagem: "Cadastro falhou!" });

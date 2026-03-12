@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Formulario de login</h1>
-    <form action="/login" method="POST" id="form">
+    <form action="http://localhost:3000/login" method="POST" id="form">
         <label for="nome">Nome: </label>
         <input type="text" name="nome" id="nome"><br>
         <label for="senha">Senha: </label>
@@ -15,33 +15,5 @@
         <button type="submit">Enviar dados</button>
     </form>
 </body>
-<script>
-    const axios = require("axios")
-
-    const ROOT = "http://localhost:3000"
-    const api = axios.create(
-        {
-            baseUrl: ROOT,
-            timeout: 10000,
-            headers:{
-                "Content-type": "application/json"
-            }
-        }   
-    )
-
-    document.getElementById("form").addEventListener("submit", async (e) => {
-        e.preventDefault()
-        try{
-            const dados = {
-                nome: document.getElementById("nome").value,
-                senha: document.getElementById("senha").value
-            }
-            const resposta = await api.post("/login",dados)
-            const dadosResposta = await resposta.json()
-        }
-        catch(error){
-            console.error(error)
-        }
-    })
-</script>
+<script src="login.js"></script>
 </html>
