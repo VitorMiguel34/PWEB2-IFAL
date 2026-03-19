@@ -7,13 +7,17 @@
 </head>
 <body>
     <h1>Página de cadastro</h1>
-    <form action="/" method="POST" id="formLogin">
+    <form action="http://localhost:3000/cadastroUsuario" method="POST" id="formLogin">
         <label for="nome">Nome: </label>
         <input type="text" name="nome" id="nome"><br>
         <label for="senha">Senha: </label>
         <input type="password" name="senha" id="senha"><br>
         <button type="submit">Enviar dados</button>
     </form>
+    <button type="button" id="botaoAtualizarUsuarios">Atualizar lista de usuários</button>
+    <ul id="listaUsuarios">
+
+    </ul>
 </body>
-<script src="cadastro.js"></script>
+<script src="index.js"></script>
 </html>
