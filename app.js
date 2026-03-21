@@ -12,40 +12,30 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
-    res.render("cadastro");
+    res.render("index");
 });
 
-app.get("/login", (req,res) => {
-    res.render("login")
-})
-
-app.post("/login", (req, res) => {
-    const { nome, senha } = req.body;
-    const usuario = usuariosCadastrados.find(u => u.nome === nome);
-    const resposta = {}
-    if (!usuario) {
-        resposta.mensagem = "Usuário inexistente"
-    }
-    else if (usuario.senha !== senha) {
-        resposta.mensagem = "Senha incorreta"
-    }
-    else{
-        resposta.mensagem = "Login concluido!"
-    }
-    res.json(resposta)
-});
-
-app.post("/", (req, res) => {
+app.post("/cadastroUsuario", (req, res) => {
     try {
         const { nome, senha } = req.body;
-        usuariosCadastrados.push({ nome, senha });
-        console.log("Lista atual:", usuariosCadastrados);
-        res.redirect("/login")
+        const usuarioExistente = usuariosCadastrados.find(u => u.nome === nome)
+        if(usuarioExistente){
+            res.json({mensagem: "Um usuário com esse nome já existe!"})
+        }
+        else{
+            usuariosCadastrados.push({ nome, senha });
+            console.log("Lista atual:", usuariosCadastrados);
+            res.json({mensagem: "cadastro concluido!"})
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensagem: "Cadastro falhou!" });
     }
 });
+
+app.get("/listaUsuarios", (req, res) => {
+    res.sendJson({usuarios: usuariosCadastrados})
+})
 
 app.listen(PORT, () => {
     console.log(`Ola! Servidor rodando em http://localhost:${PORT}`);
