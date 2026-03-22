@@ -3,6 +3,7 @@ const path = require("path");
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
@@ -34,7 +35,8 @@ app.post("/cadastroUsuario", (req, res) => {
 });
 
 app.get("/listaUsuarios", (req, res) => {
-    res.sendJson({usuarios: usuariosCadastrados})
+    console.log("Atualizando lista de usuários...")
+    res.json({usuarios: usuariosCadastrados})
 })
 
 app.listen(PORT, () => {

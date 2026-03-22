@@ -1,5 +1,3 @@
-const axios = require("axios")
-
 const ROOT = "http://localhost:3000"
 const api = axios.create(
     {

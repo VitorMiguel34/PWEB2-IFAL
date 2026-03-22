@@ -1,5 +1,3 @@
-const { api } = require("service/service.js")
-
 async function cadastrarUsuario(e){
     e.preventDefault()
     try{
@@ -41,5 +39,5 @@ async function atualizarListaUsuarios(){
     }
 }
 
-document.getElementById("formCadastro").addEventListener("submit", cadastrarUsuario)
+document.getElementById("formLogin").addEventListener("submit", cadastrarUsuario)
 document.getElementById("botaoAtualizarUsuarios").addEventListener("click", atualizarListaUsuarios)
